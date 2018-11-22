@@ -8,19 +8,23 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import static com.blueskylinks.home_automation.R.drawable.*;
+import static com.blueskylinks.home_automation.R.string.*;
 
 public class Setting extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -31,8 +35,12 @@ public class Setting extends AppCompatActivity {
     TextView t1;
     TextView fanSpeed;
     TextView bulb1;
+    View view;
+    LayoutInflater layoutInflater;
+    private ActionBarDrawerToggle mDrawerToggle;
     TextView bulb2;
     LinearLayout root;
+    ScrollView root1;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int count=0;
@@ -45,10 +53,18 @@ public class Setting extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawer_layout);
         // Toolbar toolbar = findViewById(R.id.toolbar);
 
+        layoutInflater = getLayoutInflater();
+
+
         root=findViewById(R.id.root_layout);
+        root1=findViewById(R.id.scrollView);
         ActionBar actionbar = getSupportActionBar();
+        //Enabling Home button
+       // getActionBar().setHomeButtonEnabled(true);
+      //  getActionBar().setDisplayHomeAsUpEnabled(true);
         actionbar.setDisplayHomeAsUpEnabled(true);
        // actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
         t1=findViewById(R.id.Room_name);
         fanSpeed=findViewById(R.id.fan_speed);
         bulb1=findViewById(R.id.bulb1_status);
@@ -164,7 +180,15 @@ public class Setting extends AppCompatActivity {
            else return;
     }
     public void add_layout(){
-        LinearLayout llay1 = new LinearLayout(this);
+
+        view = layoutInflater.inflate(R.layout.dynamic_layout, root, false);
+
+        // In order to get the view we have to use the new view with text_layout in it
+       LinearLayout layout = (LinearLayout) view.findViewById(R.id.extra_layout);
+        // Add the text view to the parent layout
+        root.addView(layout);
+
+       /* LinearLayout llay1 = new LinearLayout(this);
 //        llay1.getLayoutParams().width=200;
   //      llay1.getLayoutParams().height=0;
         llay1.setVisibility(View.VISIBLE);
@@ -173,7 +197,7 @@ public class Setting extends AppCompatActivity {
         TextView text=new TextView(this);
         text.setText("Test version");
         llay1.addView(text);
-        root.addView(llay1);
+        root.addView(llay1);*/
     }
 
     //function for bulb1 on/off
@@ -190,6 +214,7 @@ public class Setting extends AppCompatActivity {
     public void Home_func(View view){
         //starting another activity..
         Intent it4 = new Intent(Setting.this, MainActivity.class);
+
         startActivity(it4);
     }
 }

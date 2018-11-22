@@ -199,8 +199,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:layout_marginTop="8dp"
+                    android:onClick="air_activity"
                     android:background="@drawable/border_shadow"
-                    app:srcCompat="@mipmap/flash"/>
+                    app:srcCompat="@mipmap/perfume"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -423,11 +424,12 @@
             android:layout_marginTop="8dp"
             android:onClick="setting_func"
             app:srcCompat="@mipmap/settings"/>
+
         <ImageView
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:layout_weight="1" />
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"

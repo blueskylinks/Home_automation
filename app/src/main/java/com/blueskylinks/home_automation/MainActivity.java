@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     BluetoothLeScanner scanner;
     private BluetoothDevice ble_device;
     ScanRecord scan_rec;
+    byte sc1[];
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
         initialize();
-
     }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -110,9 +110,13 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Scan result", String.valueOf(rssi));
             Log.i("record", scan_rec.toString());
 
+            sc1 = scan_rec.getManufacturerSpecificData(0);
+            /*for (int i = 0; i < sc1.length; i++) {
+                Log.i("Data-----:", String.valueOf(sc1[i]));
+               // lr[i] = sc1[i];
+            }*/
         }
     };
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void stopscand() {
@@ -125,4 +129,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(it4);
 
     }
+    public void air_activity(View view){
+        Intent it=new Intent(this,Airfreshner_activity.class);
+        startActivity(it);
+    }
 }
+
